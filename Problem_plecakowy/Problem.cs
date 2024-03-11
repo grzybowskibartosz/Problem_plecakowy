@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
+[assembly: InternalsVisibleTo("TestProject1")]
+[assembly: InternalsVisibleTo("WinFormsApp1"), InternalsVisibleTo("GUI")]
 namespace Problem_plecakowy
 {
     public class Problem
     {
         public int seed { get; }
         public int n { get; }
-        public List<Item> Items { get; }
+        public List<Item> Items { get; set; }
 
         private Random rand;
 
@@ -54,13 +57,19 @@ namespace Problem_plecakowy
 
             foreach (var Item in Items) 
             {
-                if (totalWeight + Item.weight <= Capacity)
+                if ((totalWeight + Item.weight <= Capacity) && (Item.weight <= Capacity))
                 {
                     Items_packed.Add(Item);
                     totalWeight += Item.weight;
                     totalValue += Item.value;
-                } 
+                }
+                else
+                {
+                    totalValue += 0;
+                    totalWeight += 0;
+                }
             }
+
             return new Result(totalWeight, totalValue, Items_packed);
         }
     }

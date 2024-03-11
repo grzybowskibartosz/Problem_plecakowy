@@ -1,5 +1,7 @@
 ﻿using System;
-
+using System.Runtime.CompilerServices;
+[assembly: InternalsVisibleTo("TestProject1")]
+[assembly: InternalsVisibleTo("WinFormsApp1"), InternalsVisibleTo("GUI")]
 namespace Problem_plecakowy
 {
     public class Program
